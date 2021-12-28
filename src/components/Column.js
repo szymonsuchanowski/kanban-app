@@ -21,13 +21,13 @@ const Column = (props) => {
     );
 
     const createFilteredTasksList = (is2ColLayout, isDoing) => {
-        let tasksList = columnTasksList();
         if (is2ColLayout && isDoing) {
-            tasksList = columnTasksList().fliter((task) => task.isDoing);
-        } else if (is2ColLayout && !isDoing) {
-            tasksList = columnTasksList().filter((task) => !task.isDoing);
+            return columnTasksList().filter((task) => task.isDoing);
         }
-        return tasksList;
+        if (is2ColLayout && !isDoing) {
+            return columnTasksList().filter((task) => !task.isDoing);
+        }
+        return columnTasksList();
     };
 
     const renderTasks = (is2ColLayout, isDoing = false) => {
