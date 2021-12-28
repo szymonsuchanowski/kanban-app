@@ -5,8 +5,11 @@ import Column from './Column';
 const Board = () => {
     const columns = useContext(ColumnsContext);
     return (
-        <div>
-            <ol style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className="app__board board">
+            <ol
+                className="board__container"
+                style={{ display: 'flex', justifyContent: 'space-between' }}
+            >
                 {columns.map((col) => (
                     <Column key={col.name} data={col} />
                 ))}
