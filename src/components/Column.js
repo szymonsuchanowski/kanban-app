@@ -5,6 +5,7 @@ import Task from './Task';
 const Column = (props) => {
     const {
         data: { id, name, limit, isDivided },
+        showModal,
     } = props;
 
     const tasks = useContext(TasksContext);
@@ -32,7 +33,7 @@ const Column = (props) => {
 
     const renderTasks = (is2ColLayout, isDoing = false) => {
         const tasksList = createFilteredTasksList(is2ColLayout, isDoing);
-        return tasksList.map((task) => <Task data={task} key={task.id} />);
+        return tasksList.map((task) => <Task data={task} key={task.id} showModal={showModal} />);
     };
 
     const render2ColLayout = () => (
