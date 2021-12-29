@@ -8,7 +8,7 @@ const Task = (props) => {
     return (
         <li>
             {name}, {owner}, {idColumn}
-            <button onClick={() => showModal(1)} type="button">
+            <button onClick={() => showModal()} type="button">
                 open modal
             </button>
         </li>

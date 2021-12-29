@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
-import { ColumnsContext } from '../context';
+import React from 'react';
 import Column from './Column';
 
 const Board = (props) => {
-    const columns = useContext(ColumnsContext);
-    const { showModal } = props;
+    const { columns, showModal } = props;
     return (
         <div className="app__board board">
             <ol
