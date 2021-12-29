@@ -1,32 +1,27 @@
 import React from 'react';
-import MODAL_TYPE from '../helpers/MODAL_TYPE';
+import MODAL_TYPE from '../helpers/modalType';
+import Form from './Form';
 
 const Modal = (props) => {
     const { closeModal, modalData } = props;
 
+    const modalContent = {
+        [MODAL_TYPE.FORM]: <Form closeModal={closeModal} />,
+        [MODAL_TYPE.FULL_PENDING]: <p>full pending</p>,
+        [MODAL_TYPE.FULL_NEXT_COL]: <p>full next</p>,
+        [MODAL_TYPE.FULL_PREV_COL]: <p>full prev</p>,
+        [MODAL_TYPE.REMOVE_TASK]: <p>xyz</p>,
+        [MODAL_TYPE.CLEAR_BOARD]: <p>xyz</p>,
+    };
+
     const rednerModalContent = () => {
         const { type } = modalData;
-        if (type === MODAL_TYPE.FORM) {
-            return <p>form</p>;
-        }
-        if (type === MODAL_TYPE.FULL_PENDING) {
-            return <p>full pending</p>;
-        }
-        if (type === MODAL_TYPE.FULL_NEXT_COL) {
-            return <p>full next col</p>;
-        }
-        if (type === MODAL_TYPE.FULL_PREV_COL) {
-            return <p>full prev col</p>;
-        }
-        if (type === MODAL_TYPE.CLEAR_BOARD) {
-            return <p>clear board</p>;
-        }
-        return null;
+        return modalContent[type];
     };
 
     const handleClick = (e) => {
         if (e.target.classList.contains('modal__overlay')) {
-            closeModal({ show: false, case: null });
+            closeModal();
         }
     };
 
@@ -49,7 +44,7 @@ const Modal = (props) => {
         >
             <div style={{ width: '60%' }}>
                 <p>Modal</p>
-                <button type="button" onClick={() => closeModal({ show: false, case: 1 })}>
+                <button type="button" onClick={() => closeModal()}>
                     close modal
                 </button>
                 <div>{rednerModalContent()}</div>

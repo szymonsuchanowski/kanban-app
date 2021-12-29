@@ -2,12 +2,12 @@ import React from 'react';
 
 const Task = (props) => {
     const {
-        data: { name, idColumn },
+        data: { name, owner, idColumn },
         showModal,
     } = props;
     return (
         <li>
-            {name}, {idColumn}
+            {name}, {owner}, {idColumn}
             <button onClick={() => showModal(1)} type="button">
                 open modal
             </button>
