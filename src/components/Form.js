@@ -1,7 +1,7 @@
 import React, { useReducer, useState, useContext } from 'react';
 import FormField from './FormField';
 import DataValidator from '../helpers/DataValidator';
-import fields from '../helpers/formFields';
+import fields from '../data/formFieldsData';
 import { convertArrToObj, getInputsNames, isObjectEmpty } from '../helpers/helpersFunctions';
 import ACTIONS from '../helpers/actions';
 import { EditContext } from '../context';

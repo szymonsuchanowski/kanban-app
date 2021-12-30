@@ -2,7 +2,7 @@ import React, { useReducer, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import MODAL_TYPE from '../helpers/modalType';
 import { EditContext, TasksContext } from '../context';
-import columns from '../helpers/columnsData';
+import columns from '../data/columnsData';
 import Board from './Board';
 import Modal from './Modal';
 
@@ -21,6 +21,17 @@ const Kanban = () => {
             case 'add': {
                 console.log(action.payload);
                 return [...tasks, createNewTask(action.payload.taskData)];
+            }
+            case 'move': {
+                const {
+                    payload: { id, ...rest },
+                } = action;
+                return tasks.map((task) => {
+                    if (task.id === id) {
+                        return { ...task, ...rest };
+                    }
+                    return task;
+                });
             }
             default:
                 return tasks;
@@ -66,7 +77,7 @@ const Kanban = () => {
             </div>
             <TasksContext.Provider value={tasks}>
                 <EditContext.Provider value={dispatch}>
-                    <Board showModal={showModal} columns={columns} />
+                    <Board showModal={showModal} />
                     {modalData.show && <Modal modalData={modalData} closeModal={closeModal} />}
                 </EditContext.Provider>
             </TasksContext.Provider>
