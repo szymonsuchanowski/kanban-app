@@ -1,13 +1,13 @@
 import React from 'react';
 import { isObjectEmpty } from '../helpers/helpersFunctions';
-import ACTIONS from '../helpers/actions';
+import { FORM_ACTIONS } from '../helpers/actions';
 
 const FormField = (props) => {
     const handleChange = (e) => {
         const { dispatch } = props;
         const { name, value } = e.target;
         dispatch({
-            type: ACTIONS.CHANGE_VALUE,
+            type: FORM_ACTIONS.CHANGE_VALUE,
             payload: { name, value },
         });
     };

@@ -1,44 +1,13 @@
 import React, { useReducer, useState } from 'react';
-import { v4 as uuid } from 'uuid';
 import MODAL_TYPE from '../helpers/modalType';
 import { EditContext, TasksContext } from '../context';
 import columns from '../data/columnsData';
+import { tasksReducer } from '../reducers';
 import Board from './Board';
 import Modal from './Modal';
 
 const Kanban = () => {
-    const createNewTask = ({ name, owner }) => ({
-        id: uuid(),
-        name,
-        owner,
-        isDoing: false,
-        idColumn: 1,
-    });
-
-    const reducer = (tasks, action) => {
-        const { type } = action;
-        switch (type) {
-            case 'add': {
-                console.log(action.payload);
-                return [...tasks, createNewTask(action.payload.taskData)];
-            }
-            case 'move': {
-                const {
-                    payload: { id, ...rest },
-                } = action;
-                return tasks.map((task) => {
-                    if (task.id === id) {
-                        return { ...task, ...rest };
-                    }
-                    return task;
-                });
-            }
-            default:
-                return tasks;
-        }
-    };
-
-    const [tasks, dispatch] = useReducer(reducer, []);
+    const [tasks, dispatch] = useReducer(tasksReducer, []);
 
     const initModalData = {
         show: false,
@@ -58,9 +27,11 @@ const Kanban = () => {
         const { limit } = pendingCol;
         const pendingTasksQuantity = tasks.filter((task) => task.idColumn === pendingCol.id).length;
         return limit === pendingTasksQuantity
-            ? showModal(MODAL_TYPE.FULL_PENDING)
+            ? showModal(MODAL_TYPE.FULL_COLUMN, pendingCol.id)
             : showModal(MODAL_TYPE.FORM);
     };
+
+    const handleClear = () => showModal(MODAL_TYPE.CLEAR_BOARD);
 
     return (
         <div className="app">
@@ -73,6 +44,15 @@ const Kanban = () => {
                     type="button"
                 >
                     new task
+                </button>
+                <button
+                    className="bar__btn"
+                    onClick={handleClear}
+                    title="clear board"
+                    type="button"
+                    disabled={tasks.length === 0}
+                >
+                    clear board
                 </button>
             </div>
             <TasksContext.Provider value={tasks}>

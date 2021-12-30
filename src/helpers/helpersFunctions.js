@@ -29,3 +29,17 @@ export const isColumnFull = (column, columnId, tasks) => {
     const columnTasksQuantity = tasks.filter((task) => task.idColumn === columnId).length;
     return limit === columnTasksQuantity;
 };
+
+export const createStateData = () =>
+    fields.map((field) => {
+        const { name } = field;
+        return {
+            [name]: {
+                value: '',
+                isValid: true,
+                isFill: false,
+            },
+        };
+    });
+
+export const createInitStateObj = () => convertArrToObj(createStateData());

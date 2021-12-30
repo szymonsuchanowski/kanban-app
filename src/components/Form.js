@@ -2,82 +2,26 @@ import React, { useReducer, useState, useContext } from 'react';
 import FormField from './FormField';
 import DataValidator from '../helpers/DataValidator';
 import fields from '../data/formFieldsData';
-import { convertArrToObj, getInputsNames, isObjectEmpty } from '../helpers/helpersFunctions';
-import ACTIONS from '../helpers/actions';
+import {
+    convertArrToObj,
+    getInputsNames,
+    isObjectEmpty,
+    createInitStateObj,
+} from '../helpers/helpersFunctions';
+import { formReducer } from '../reducers';
+import { FORM_ACTIONS, TASKS_ACTIONS } from '../helpers/actions';
 import { EditContext } from '../context';
 
 const ContactForm = (props) => {
     const editTasks = useContext(EditContext);
 
-    const createStateData = () =>
-        fields.map((field) => {
-            const { name } = field;
-            return {
-                [name]: {
-                    value: '',
-                    isValid: true,
-                    isFill: false,
-                },
-            };
-        });
-
-    const createInitStateObj = () => convertArrToObj(createStateData());
-
-    const reducer = (state, action) => {
-        const { type } = action;
-        switch (type) {
-            case ACTIONS.CHANGE_VALUE: {
-                const {
-                    payload: { name, value },
-                } = action;
-                return {
-                    ...state,
-                    [name]: {
-                        ...state[name],
-                        value,
-                    },
-                };
-            }
-            case ACTIONS.SET_INVALID: {
-                const {
-                    payload: { name },
-                } = action;
-                return {
-                    ...state,
-                    [name]: {
-                        ...state[name],
-                        isValid: false,
-                        isFill: true,
-                    },
-                };
-            }
-            case ACTIONS.SET_VALID: {
-                const {
-                    payload: { name },
-                } = action;
-                return {
-                    ...state,
-                    [name]: {
-                        ...state[name],
-                        isValid: true,
-                        isFill: true,
-                    },
-                };
-            }
-            case ACTIONS.CLEAR_FORM:
-                return createInitStateObj();
-            default:
-                return state;
-        }
-    };
-
-    const [state, dispatch] = useReducer(reducer, createInitStateObj());
+    const [state, dispatch] = useReducer(formReducer, createInitStateObj());
     const [errors, setErrors] = useState({});
 
     const markInputInvalid = (errorsArr, err, inputName) => {
         errorsArr.push(err);
         dispatch({
-            type: ACTIONS.SET_INVALID,
+            type: FORM_ACTIONS.SET_INVALID,
             payload: { name: inputName },
         });
     };
@@ -85,7 +29,7 @@ const ContactForm = (props) => {
     const markInputValid = (inputName) => {
         if (!state[inputName].isValid) {
             dispatch({
-                type: ACTIONS.SET_VALID,
+                type: FORM_ACTIONS.SET_VALID,
                 payload: { name: inputName },
             });
         }
@@ -126,7 +70,7 @@ const ContactForm = (props) => {
         setErrors({});
         const taskData = prepareData();
         editTasks({
-            type: 'add',
+            type: TASKS_ACTIONS.ADD,
             payload: { taskData },
         });
         closeModal();
@@ -152,7 +96,7 @@ const ContactForm = (props) => {
     return (
         <div>
             <div>
-                <h1>contact form</h1>
+                <h2>new task</h2>
                 <form onSubmit={handleSubmit} noValidate>
                     {renderFormFields()}
                     <input type="submit" value="send" />

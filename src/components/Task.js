@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { ColumnsContext, EditContext, TasksContext } from '../context';
 import MODAL_TYPE from '../helpers/modalType';
+import { TASKS_ACTIONS } from '../helpers/actions';
 import {
     setNavClass,
     getColumnById,
@@ -22,12 +23,12 @@ const Task = (props) => {
     const moveTaskToColumn = (direction, followingColumnId) => {
         const setIsDoing = direction === 'next';
         return moveTask({
-            type: 'move',
+            type: TASKS_ACTIONS.MOVE,
             payload: { id, idColumn: followingColumnId, isDoing: setIsDoing },
         });
     };
 
-    const stopMove = (columnId) => showModal(MODAL_TYPE.FULL_NEXT_COL, columnId);
+    const stopMove = (columnId) => showModal(MODAL_TYPE.FULL_COLUMN, columnId);
 
     const moveOutsideColumn = (direction) => {
         const followingColumnId = getFollowingColumnId(direction, idColumn);
@@ -38,7 +39,8 @@ const Task = (props) => {
             : moveTaskToColumn(direction, followingColumnId);
     };
 
-    const moveInsideColumn = () => moveTask({ type: 'move', payload: { id, isDoing: !isDoing } });
+    const moveInsideColumn = () =>
+        moveTask({ type: TASKS_ACTIONS.MOVE, payload: { id, isDoing: !isDoing } });
 
     const handleClick = (direction) => {
         const [currentColumn] = getColumnById(idColumn, columns);
@@ -55,8 +57,8 @@ const Task = (props) => {
     return (
         <li className="column__item item">
             {name}, {owner}, {idColumn}
-            <button onClick={() => showModal()} type="button">
-                open modal
+            <button onClick={() => showModal(MODAL_TYPE.REMOVE_TASK, id)} type="button">
+                remove task
             </button>
             <span
                 className={setNavClass('prev', columns, idColumn)}
