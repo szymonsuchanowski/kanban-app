@@ -1,16 +1,21 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import columns from '../data/columnsData';
 import { EditContext, TasksContext } from '../context';
 import { tasksReducer } from '../reducers';
-import { useModal } from '../hooks';
+import { useModal, useStorage } from '../hooks';
 import { getColumnTasksQuantity, setFullColumnInfo } from '../helpers/helpersFunctions';
 import Board from './Board';
 import Form from './Form';
 import Confirmation from './Confirmation';
 
 const Kanban = () => {
-    const [tasks, dispatch] = useReducer(tasksReducer, []);
+    const [saveToStorage, getFromStorage] = useStorage();
     const [ModalWithContent, showModal, closeModal, setContent] = useModal();
+    const [tasks, dispatch] = useReducer(tasksReducer, getFromStorage() || []);
+
+    useEffect(() => {
+        saveToStorage(tasks);
+    }, [tasks]);
 
     const showFullColumnInfo = (name) => {
         setContent(setFullColumnInfo(name));
