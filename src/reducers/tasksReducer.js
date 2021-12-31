@@ -19,12 +19,7 @@ const tasksReducer = (tasks, action) => {
             const {
                 payload: { id, ...rest },
             } = action;
-            return tasks.map((task) => {
-                if (task.id === id) {
-                    return { ...task, ...rest };
-                }
-                return task;
-            });
+            return tasks.map((task) => (task.id === id ? { ...task, ...rest } : task));
         }
         case TASKS_ACTIONS.REMOVE: {
             const { payload } = action;

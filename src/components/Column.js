@@ -1,18 +1,14 @@
 import React, { useContext } from 'react';
+import { getColumnTasksQuantity, createFilteredTasksList } from '../helpers/helpersFunctions';
 import { TasksContext } from '../context';
 import Task from './Task';
 
 const Column = (props) => {
     const {
         data: { id, name, limit, isDivided },
-        showModal,
     } = props;
 
     const tasks = useContext(TasksContext);
-
-    const columnTasksList = () => tasks.filter((task) => task.idColumn === id);
-
-    const columnTasksQuantity = () => columnTasksList().length;
 
     const renderColumnSuheader = () => (
         <div className="column__subheader" style={{ display: 'flex' }}>
@@ -21,20 +17,14 @@ const Column = (props) => {
         </div>
     );
 
-    const createFilteredTasksList = (is2ColLayout, isDoing) => {
-        if (is2ColLayout && isDoing) {
-            return columnTasksList().filter((task) => task.isDoing);
-        }
-        if (is2ColLayout && !isDoing) {
-            return columnTasksList().filter((task) => !task.isDoing);
-        }
-        return columnTasksList();
+    const renderTasks = (is2ColLayout, isDoing = false) => {
+        const tasksList = createFilteredTasksList(is2ColLayout, isDoing, tasks, id);
+        return tasksList.map((task) => <Task data={task} key={task.id} />);
     };
 
-    const renderTasks = (is2ColLayout, isDoing = false) => {
-        const tasksList = createFilteredTasksList(is2ColLayout, isDoing);
-        return tasksList.map((task) => <Task data={task} key={task.id} showModal={showModal} />);
-    };
+    const render1ColLayout = () => (
+        <ul className="column__sublist column__sublist--1col">{renderTasks(isDivided)}</ul>
+    );
 
     const render2ColLayout = () => (
         <>
@@ -45,10 +35,6 @@ const Column = (props) => {
         </>
     );
 
-    const render1ColLayout = () => (
-        <ul className="column__sublist column__sublist--1col">{renderTasks(isDivided)}</ul>
-    );
-
     return (
         <li className="board__column column">
             <header
@@ -57,7 +43,7 @@ const Column = (props) => {
             >
                 <h2 className={`column__title column__title--${name}`}>{name}</h2>
                 <p className="column__info">
-                    {columnTasksQuantity()} / {limit}
+                    {getColumnTasksQuantity(tasks, id)} / {limit}
                 </p>
                 {isDivided ? renderColumnSuheader() : null}
             </header>

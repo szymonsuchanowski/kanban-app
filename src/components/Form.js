@@ -12,9 +12,8 @@ import { formReducer } from '../reducers';
 import { FORM_ACTIONS, TASKS_ACTIONS } from '../helpers/actions';
 import { EditContext } from '../context';
 
-const ContactForm = (props) => {
+const Form = (props) => {
     const editTasks = useContext(EditContext);
-
     const [state, dispatch] = useReducer(formReducer, createInitStateObj());
     const [errors, setErrors] = useState({});
 
@@ -51,7 +50,7 @@ const ContactForm = (props) => {
         return errorsObj;
     };
 
-    const prepareData = () => {
+    const prepareDataToSubmit = () => {
         const dataArr = fields.map((field) => {
             const { name } = field;
             const { value } = state[name];
@@ -68,7 +67,7 @@ const ContactForm = (props) => {
     const handleSend = () => {
         const { closeModal } = props;
         setErrors({});
-        const taskData = prepareData();
+        const taskData = prepareDataToSubmit();
         editTasks({
             type: TASKS_ACTIONS.ADD,
             payload: { taskData },
@@ -106,4 +105,4 @@ const ContactForm = (props) => {
     );
 };
 
-export default ContactForm;
+export default Form;

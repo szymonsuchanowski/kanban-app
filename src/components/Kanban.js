@@ -1,64 +1,69 @@
-import React, { useReducer, useState } from 'react';
-import MODAL_TYPE from '../helpers/modalType';
-import { EditContext, TasksContext } from '../context';
+import React, { useReducer } from 'react';
 import columns from '../data/columnsData';
+import { EditContext, TasksContext } from '../context';
 import { tasksReducer } from '../reducers';
+import { useModal } from '../hooks';
+import { getColumnTasksQuantity, setFullColumnInfo } from '../helpers/helpersFunctions';
 import Board from './Board';
-import Modal from './Modal';
+import Form from './Form';
+import Confirmation from './Confirmation';
 
 const Kanban = () => {
     const [tasks, dispatch] = useReducer(tasksReducer, []);
+    const [ModalWithContent, showModal, closeModal, setContent] = useModal();
 
-    const initModalData = {
-        show: false,
-        type: null,
-        contentId: null,
+    const showFullColumnInfo = (name) => {
+        setContent(setFullColumnInfo(name));
+        showModal();
     };
 
-    const [modalData, setModalData] = useState(initModalData);
+    const openForm = () => {
+        setContent(<Form closeModal={closeModal} />);
+        showModal();
+    };
 
-    const showModal = (modalType, contentId = null) =>
-        setModalData({ show: true, type: modalType, contentId });
-
-    const closeModal = () => setModalData(initModalData);
-
-    const handleClick = () => {
+    const handleTaskAdding = () => {
         const [pendingCol] = columns;
-        const { limit } = pendingCol;
-        const pendingTasksQuantity = tasks.filter((task) => task.idColumn === pendingCol.id).length;
-        return limit === pendingTasksQuantity
-            ? showModal(MODAL_TYPE.FULL_COLUMN, pendingCol.id)
-            : showModal(MODAL_TYPE.FORM);
+        const { limit, id, name } = pendingCol;
+        const pendingTasksQuantity = getColumnTasksQuantity(tasks, id);
+        return limit === pendingTasksQuantity ? showFullColumnInfo(name) : openForm();
     };
 
-    const handleClear = () => showModal(MODAL_TYPE.CLEAR_BOARD);
+    const handleClear = () => {
+        setContent(<Confirmation closeModal={closeModal} />);
+        showModal();
+    };
 
     return (
         <div className="app">
             <div className="app__bar bar">
-                <header className="bar__header">team board</header>
-                <button
-                    className="bar__btn"
-                    onClick={handleClick}
-                    title="create new task"
-                    type="button"
-                >
-                    new task
-                </button>
-                <button
-                    className="bar__btn"
-                    onClick={handleClear}
-                    title="clear board"
-                    type="button"
-                    disabled={tasks.length === 0}
-                >
-                    clear board
-                </button>
+                <header className="bar__header">
+                    <h1 className="bar__title">team board</h1>
+                    <div className="bar__wrapper">
+                        <button
+                            className="bar__btn bar__btn--add"
+                            onClick={handleTaskAdding}
+                            title="create new task"
+                            type="button"
+                        >
+                            new task
+                        </button>
+                        <button
+                            className="bar__btn bar__btn--clear"
+                            onClick={handleClear}
+                            title="clear board"
+                            type="button"
+                            disabled={tasks.length === 0}
+                        >
+                            clear board
+                        </button>
+                    </div>
+                </header>
             </div>
             <TasksContext.Provider value={tasks}>
                 <EditContext.Provider value={dispatch}>
-                    <Board showModal={showModal} />
-                    {modalData.show && <Modal modalData={modalData} closeModal={closeModal} />}
+                    <Board />
+                    <ModalWithContent />
                 </EditContext.Provider>
             </TasksContext.Provider>
         </div>
