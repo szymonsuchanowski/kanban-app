@@ -1,5 +1,5 @@
 import React from 'react';
-import { isObjectEmpty } from '../helpers/helpersFunctions';
+import { isObjectEmpty, setClassName } from '../helpers/helpersFunctions';
 import { FORM_ACTIONS } from '../helpers/actions';
 
 const FormField = (props) => {
@@ -24,6 +24,13 @@ const FormField = (props) => {
             : null;
     };
 
+    const getCurrentDate = () => {
+        const timezoneOffset = new Date().getTimezoneOffset() * 60000;
+        return new Date(Date.now() - timezoneOffset).toISOString().slice(0, 10);
+    };
+
+    const setDateRange = (type) => (type === 'date' ? getCurrentDate() : null);
+
     const renderField = () => {
         const {
             field: { name, label, type = null, fieldName = 'input' },
@@ -32,23 +39,26 @@ const FormField = (props) => {
         const FieldName = fieldName;
         return (
             <>
-                <label htmlFor={name}>
+                <label className="form__label" htmlFor={name}>
                     {label}
                     <FieldName
+                        className={setClassName(name, formState, 'input')}
                         id={name}
                         name={name}
                         type={type}
                         value={formState[name].value}
                         onChange={handleChange}
+                        min={setDateRange(type)}
                         autoComplete="off"
                     />
+                    <span className={setClassName(name, formState, 'border')} />
                 </label>
-                <div>{renderErrorMsg()}</div>
+                <div className="form__placeholder">{renderErrorMsg()}</div>
             </>
         );
     };
 
-    return <div>{renderField()}</div>;
+    return <div className="form__field">{renderField()}</div>;
 };
 
 export default FormField;

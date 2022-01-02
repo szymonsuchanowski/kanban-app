@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 import fields from '../data/formFieldsData';
 
 export const getColumnTasksList = (tasks, id) => tasks.filter((task) => task.idColumn === id);
@@ -43,6 +44,8 @@ export const isColumnFull = (column, columnId, tasks) => {
     return limit === tasksInColumnQuantity;
 };
 
+export const setDateFormat = (date) => date.split('-').reverse().join('.');
+
 export const convertArrToObj = (arr) => Object.assign({}, ...arr);
 
 export const getInputsNames = () => fields.map((field) => field.name);
@@ -62,3 +65,50 @@ export const createStateData = () =>
     });
 
 export const createInitStateObj = () => convertArrToObj(createStateData());
+
+export const getCurrentDate = () => {
+    const timezoneOffset = new Date().getTimezoneOffset() * 60000;
+    return new Date(Date.now() - timezoneOffset).toISOString().slice(0, 10);
+};
+
+export const createNewTask = ({ taskName, owner, email, date, message }) => ({
+    id: uuid(),
+    taskName,
+    owner,
+    email,
+    date,
+    message,
+    isDoing: false,
+    idColumn: 1,
+});
+
+export const sortTasksByDate = (taskData) =>
+    taskData.sort((a, b) => {
+        if (!a.date && !b.date) {
+            return 0;
+        }
+        if (!a.date) {
+            return 1;
+        }
+        if (!b.date) {
+            return -1;
+        }
+        return a.date < b.date ? -1 : 1;
+    });
+
+export const setDetailClassName = (deadlineDate) => {
+    const currTime = new Date(getCurrentDate()).getTime();
+    const deadlineTime = new Date(deadlineDate).getTime();
+    const daysDifference = (deadlineTime - currTime) / (24 * 60 * 60 * 1000);
+    return daysDifference <= 2 ? 'item__wrapper item__wrapper--important' : 'item__wrapper';
+};
+
+export const setClassName = (inputName, formState, fieldType) => {
+    if (formState[inputName].isValid && formState[inputName].isFill) {
+        return `form__${fieldType} form__${fieldType}--valid`;
+    }
+    if (!formState[inputName].isValid && formState[inputName].isFill) {
+        return `form__${fieldType} form__${fieldType}--invalid`;
+    }
+    return `form__${fieldType}`;
+};

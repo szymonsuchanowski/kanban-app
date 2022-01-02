@@ -1,6 +1,6 @@
 const formFields = [
     {
-        name: 'name',
+        name: 'taskName',
         label: 'task',
         type: 'text',
     },
@@ -8,6 +8,21 @@ const formFields = [
         name: 'owner',
         label: 'owner',
         type: 'text',
+    },
+    {
+        name: 'email',
+        label: 'e-mail',
+        type: 'email',
+    },
+    {
+        name: 'date',
+        label: 'deadline',
+        type: 'date',
+    },
+    {
+        name: 'message',
+        label: 'task description',
+        fieldName: 'textarea',
     },
 ];
 

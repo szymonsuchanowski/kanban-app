@@ -93,15 +93,13 @@ const Form = (props) => {
         ));
 
     return (
-        <div>
-            <div>
-                <h2>new task</h2>
-                <form onSubmit={handleSubmit} noValidate>
-                    {renderFormFields()}
-                    <input type="submit" value="send" />
-                </form>
-            </div>
-        </div>
+        <>
+            <h2 className="modal__title">new task</h2>
+            <form className="modal__form form" onSubmit={handleSubmit} noValidate>
+                {renderFormFields()}
+                <input className="form__btn" type="submit" value="add" />
+            </form>
+        </>
     );
 };
 

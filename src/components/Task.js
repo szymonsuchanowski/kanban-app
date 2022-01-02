@@ -9,12 +9,14 @@ import {
     isColumnDivided,
     getFollowingColumnId,
     isColumnFull,
+    setDateFormat,
+    setDetailClassName,
 } from '../helpers/helpersFunctions';
 import Confirmation from './Confirmation';
 
 const Task = (props) => {
     const {
-        data: { id, name, owner, idColumn, isDoing },
+        data: { id, taskName, owner, email, date, message, idColumn, isDoing },
     } = props;
 
     const [ModalWithContent, showModal, closeModal, setContent] = useModal();
@@ -59,15 +61,49 @@ const Task = (props) => {
     };
 
     const handleRemove = () => {
-        setContent(<Confirmation closeModal={closeModal} id={id} taskName={name} />);
+        setContent(<Confirmation closeModal={closeModal} id={id} taskName={taskName} />);
         showModal();
     };
+
+    const renderDeadline = (deadlineDate) => (
+        <div className={setDetailClassName(deadlineDate)}>
+            <p className="item__label">deadline</p>
+            <p className="item__msg">{setDateFormat(deadlineDate)}</p>
+        </div>
+    );
+
+    const renderMsg = () => (
+        <div className="item__wrapper">
+            <p className="item__label">description</p>
+            <p className="item__msg">{message}</p>
+        </div>
+    );
+
+    const renderAdditionalInfo = () => (
+        <div className="item__details">
+            {date ? renderDeadline(date) : null}
+            {message ? renderMsg() : null}
+        </div>
+    );
+
+    const checkAdditionalInfo = () => (date || message ? renderAdditionalInfo() : null);
+
+    const renderItemInfo = () => (
+        <div className="item__info">
+            <h3 className="item__task">{taskName}</h3>
+            <p className="item__owner">{owner}</p>
+            <a className="item__email" href={`mailto:${email}`}>
+                {email}
+            </a>
+        </div>
+    );
 
     return (
         <>
             <li className="column__item item">
-                {name}, {owner}, {idColumn}
-                <button onClick={() => handleRemove()} type="button">
+                {renderItemInfo()}
+                {checkAdditionalInfo()}
+                <button onClick={() => handleRemove()} type="button" title="remove task">
                     remove task
                 </button>
                 <span

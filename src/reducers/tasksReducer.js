@@ -1,19 +1,12 @@
-import { v4 as uuid } from 'uuid';
+import { sortTasksByDate, createNewTask } from '../helpers/helpersFunctions';
 import { TASKS_ACTIONS } from '../helpers/actions';
-
-const createNewTask = ({ name, owner }) => ({
-    id: uuid(),
-    name,
-    owner,
-    isDoing: false,
-    idColumn: 1,
-});
 
 const tasksReducer = (tasks, action) => {
     const { type } = action;
     switch (type) {
         case TASKS_ACTIONS.ADD: {
-            return [...tasks, createNewTask(action.payload.taskData)];
+            const tasksData = [...tasks, createNewTask(action.payload.taskData)];
+            return sortTasksByDate(tasksData);
         }
         case TASKS_ACTIONS.MOVE: {
             const {
