@@ -11,7 +11,7 @@ const Column = (props) => {
     const tasks = useContext(TasksContext);
 
     const renderColumnSuheader = () => (
-        <div className="column__subheader" style={{ display: 'flex' }}>
+        <div className="column__subheader">
             <p className="column__description">doing</p>
             <p className="column__description">done</p>
         </div>
@@ -37,20 +37,14 @@ const Column = (props) => {
 
     return (
         <li className="board__column column">
-            <header
-                className={`column__header column__header--${name}`}
-                style={{ minHeight: '150px' }}
-            >
+            <header className={`column__header column__header--${name}`}>
                 <h2 className={`column__title column__title--${name}`}>{name}</h2>
                 <p className="column__info">
                     {getColumnTasksQuantity(tasks, id)} / {limit}
                 </p>
                 {isDivided ? renderColumnSuheader() : null}
             </header>
-            <div
-                className="column__list"
-                style={{ display: 'flex', justifyContent: 'space-between' }}
-            >
+            <div className="column__list">
                 {isDivided ? render2ColLayout() : render1ColLayout()}
             </div>
         </li>
