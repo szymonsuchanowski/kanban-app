@@ -11,28 +11,28 @@ const Column = (props) => {
 
     const tasks = useContext(TasksContext);
 
-    const renderColumnSuheader = () => (
-        <div className="column__subheader">
-            <p className="column__description">doing</p>
-            <p className="column__description">done</p>
-        </div>
-    );
-
     const renderTasks = (is2ColLayout, isDoing = false) => {
         const tasksList = createFilteredTasksList(is2ColLayout, isDoing, tasks, id);
         return tasksList.map((task) => <Task data={task} key={task.id} />);
     };
 
     const render1ColLayout = () => (
-        <ul className="column__sublist column__sublist--1col">{renderTasks(isDivided)}</ul>
+        <ul className="column__sublist column__sublist--1col">
+            <li className="column__subheader" />
+            {renderTasks(isDivided)}
+        </ul>
     );
 
     const render2ColLayout = () => (
         <>
             <ul className="column__sublist column__sublist--doing">
+                <li className="column__subheader">doing</li>
                 {renderTasks(isDivided, true)}
             </ul>
-            <ul className="column__sublist column__sublist--done">{renderTasks(isDivided)}</ul>
+            <ul className="column__sublist column__sublist--done">
+                <li className="column__subheader">done</li>
+                {renderTasks(isDivided)}
+            </ul>
         </>
     );
 
@@ -45,7 +45,6 @@ const Column = (props) => {
                         {getColumnTasksQuantity(tasks, id)} / {limit}
                     </p>
                 </div>
-                {isDivided ? renderColumnSuheader() : null}
             </header>
             <div
                 className={

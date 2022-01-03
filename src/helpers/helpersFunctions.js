@@ -7,7 +7,7 @@ export const getColumnTasksList = (tasks, id) => tasks.filter((task) => task.idC
 export const getColumnTasksQuantity = (tasks, id) => getColumnTasksList(tasks, id).length;
 
 export const setFullColumnInfo = (columnName) => (
-    <p className="modal__paragraph">Ooops, column {columnName} is already full.</p>
+    <p className="modal__paragraph">Oops, column {columnName} is already full.</p>
 );
 
 export const createFilteredTasksList = (is2ColLayout, isDoing, tasks, id) => {

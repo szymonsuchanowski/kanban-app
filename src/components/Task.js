@@ -99,34 +99,32 @@ const Task = (props) => {
     );
 
     return (
-        <>
-            <li className="column__item item">
-                {renderItemInfo()}
-                {checkAdditionalInfo()}
-                <button onClick={() => handleRemove()} type="button" title="remove task">
-                    remove task
-                </button>
-                <span
-                    className={setNavClass('prev', columns, idColumn)}
-                    onClick={() => handleMove('prev')}
-                    role="button"
-                    title="move to previous section"
-                    aria-hidden
-                >
-                    &lt;
-                </span>
-                <span
-                    className={setNavClass('next', columns, idColumn)}
-                    onClick={() => handleMove('next')}
-                    role="button"
-                    title="move to next section"
-                    aria-hidden
-                >
-                    &gt;
-                </span>
-            </li>
+        <li className="column__item item">
+            {renderItemInfo()}
+            {checkAdditionalInfo()}
+            <button onClick={() => handleRemove()} type="button" title="remove task">
+                remove task
+            </button>
+            <span
+                className={setNavClass('prev', columns, idColumn)}
+                onClick={() => handleMove('prev')}
+                role="button"
+                title="move to previous section"
+                aria-hidden
+            >
+                &lt;
+            </span>
+            <span
+                className={setNavClass('next', columns, idColumn)}
+                onClick={() => handleMove('next')}
+                role="button"
+                title="move to next section"
+                aria-hidden
+            >
+                &gt;
+            </span>
             <ModalWithContent />
-        </>
+        </li>
     );
 };
 
