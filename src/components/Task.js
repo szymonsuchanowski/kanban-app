@@ -110,6 +110,7 @@ const Task = (props) => {
                     className={setNavClass('prev', columns, idColumn)}
                     onClick={() => handleMove('prev')}
                     role="button"
+                    title="move to previous section"
                     aria-hidden
                 >
                     &lt;
@@ -118,6 +119,7 @@ const Task = (props) => {
                     className={setNavClass('next', columns, idColumn)}
                     onClick={() => handleMove('next')}
                     role="button"
+                    title="move to next section"
                     aria-hidden
                 >
                     &gt;

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { ColumnsContext } from '../context';
 import Column from './Column';
+import './Board.css';
 
 const Board = () => {
     const columns = useContext(ColumnsContext);

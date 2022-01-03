@@ -1,0 +1,42 @@
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.column__header {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.column__header::before {
+    background-size: cover;
+    content: '';
+    display: block;
+    height: 40px;
+    position: absolute;
+    top: 10px;
+    width: 40px;
+}
+
+.column__header--pending::before {
+    background-image: url('./../img/analysis-icon.png');
+    right: 10px;
+}
+
+.column__title {
+    letter-spacing: 0.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.column__wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid black;
+}
+
+.column__subheader {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

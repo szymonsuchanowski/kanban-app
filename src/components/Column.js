@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { getColumnTasksQuantity, createFilteredTasksList } from '../helpers/helpersFunctions';
 import { TasksContext } from '../context';
 import Task from './Task';
+import './Column.css';
 
 const Column = (props) => {
     const {
@@ -38,13 +39,21 @@ const Column = (props) => {
     return (
         <li className="board__column column">
             <header className={`column__header column__header--${name}`}>
-                <h2 className={`column__title column__title--${name}`}>{name}</h2>
-                <p className="column__info">
-                    {getColumnTasksQuantity(tasks, id)} / {limit}
-                </p>
+                <div className="column__wrapper">
+                    <h2 className={`column__title column__title--${name}`}>{name}</h2>
+                    <p className="column__info">
+                        {getColumnTasksQuantity(tasks, id)} / {limit}
+                    </p>
+                </div>
                 {isDivided ? renderColumnSuheader() : null}
             </header>
-            <div className="column__list">
+            <div
+                className={
+                    isDivided
+                        ? 'column__list column__list--2col'
+                        : 'column__list column__list--1col'
+                }
+            >
                 {isDivided ? render2ColLayout() : render1ColLayout()}
             </div>
         </li>

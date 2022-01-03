@@ -7,6 +7,7 @@ import { getColumnTasksQuantity, setFullColumnInfo } from '../helpers/helpersFun
 import Board from './Board';
 import Form from './Form';
 import Confirmation from './Confirmation';
+import './Kanban.css';
 
 const Kanban = () => {
     const [saveToStorage, getFromStorage] = useStorage();

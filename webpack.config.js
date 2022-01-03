@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
-    entry: `./src/app.js`,
+    entry: './src/app.js',
     mode: 'development',
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -21,17 +21,14 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.(png|jpe?g|gif)$/i,
-                loader: 'file-loader',
-                options: {
-                    name: '[path][name].[ext]',
-                },
+                test: /\.(png|svg|jpg|gif)$/,
+                use: 'file-loader',
             },
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: `./src/index.html`,
+            template: './src/index.html',
             filename: 'index.html',
         }),
         new ESLintPlugin(),
