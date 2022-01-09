@@ -11,6 +11,7 @@ import {
 import { formReducer } from '../reducers';
 import { FORM_ACTIONS, TASKS_ACTIONS } from '../helpers/actions';
 import { EditContext } from '../context';
+import './Form.css';
 
 const Form = (props) => {
     const editTasks = useContext(EditContext);
@@ -47,6 +48,7 @@ const Form = (props) => {
         const errorsArr = [];
         createErrors(errorsArr);
         const errorsObj = convertArrToObj(errorsArr);
+        console.log(state);
         return errorsObj;
     };
 

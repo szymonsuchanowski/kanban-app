@@ -58,7 +58,7 @@ export const createStateData = () =>
         return {
             [name]: {
                 value: '',
-                isValid: true,
+                isValid: false,
                 isFill: false,
             },
         };
@@ -96,14 +96,16 @@ export const sortTasksByDate = (taskData) =>
         return a.date < b.date ? -1 : 1;
     });
 
-export const setDetailClassName = (deadlineDate) => {
+export const setDetailClassName = (deadlineDate, idColumn, columns) => {
     const currTime = new Date(getCurrentDate()).getTime();
     const deadlineTime = new Date(deadlineDate).getTime();
     const daysDifference = (deadlineTime - currTime) / (24 * 60 * 60 * 1000);
-    return daysDifference <= 2 ? 'item__wrapper item__wrapper--important' : 'item__wrapper';
+    return daysDifference <= 2 && idColumn !== columns.length
+        ? 'item__deadline item__deadline--important'
+        : 'item__deadline';
 };
 
-export const setClassName = (inputName, formState, fieldType) => {
+export const setFieldClassName = (inputName, formState, fieldType) => {
     if (formState[inputName].isValid && formState[inputName].isFill) {
         return `form__${fieldType} form__${fieldType}--valid`;
     }

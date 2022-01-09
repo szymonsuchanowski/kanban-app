@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { EditContext } from '../context';
 import { TASKS_ACTIONS } from '../helpers/actions';
+import './Confirmation.css';
 
 const Confirmation = (props) => {
     const { closeModal, id = null, taskName = null } = props;
@@ -25,18 +26,10 @@ const Confirmation = (props) => {
         <>
             <p className="modal__paragraph">{paragraphContent}</p>
             <div className="modal__actions">
-                <button
-                    className="modal__btn modal__btn--confirm"
-                    onClick={handleRemove}
-                    type="button"
-                >
+                <button className="modal__confirm" onClick={handleRemove} type="button">
                     yes
                 </button>
-                <button
-                    className="modal__btn modal__btn--cancel"
-                    onClick={() => closeModal()}
-                    type="button"
-                >
+                <button className="modal__cancel" onClick={() => closeModal()} type="button">
                     no
                 </button>
             </div>

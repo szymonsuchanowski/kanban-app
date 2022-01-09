@@ -1,0 +1,23 @@
+.modal__title {
+    font-size: 1.8rem;
+    letter-spacing: var(--letter-spacing-basic);
+    margin-bottom: 1rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form__btn {
+    background: var(--green-basic);
+    border-radius: 12px;
+    box-shadow: var(--box-shadow-btn);
+    color: var(--white-basic);
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: var(--letter-spacing-basic);
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.25rem;
+}

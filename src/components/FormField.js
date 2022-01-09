@@ -1,6 +1,7 @@
 import React from 'react';
-import { isObjectEmpty, setClassName } from '../helpers/helpersFunctions';
+import { isObjectEmpty, setFieldClassName } from '../helpers/helpersFunctions';
 import { FORM_ACTIONS } from '../helpers/actions';
+import './FormField.css';
 
 const FormField = (props) => {
     const handleChange = (e) => {
@@ -12,7 +13,7 @@ const FormField = (props) => {
         });
     };
 
-    const showErrMsg = (errMsg) => <p>{errMsg}</p>;
+    const showErrMsg = (errMsg) => <p className="form__err">{errMsg}</p>;
 
     const renderErrorMsg = () => {
         const {
@@ -42,7 +43,7 @@ const FormField = (props) => {
                 <label className="form__label" htmlFor={name}>
                     {label}
                     <FieldName
-                        className={setClassName(name, formState, 'input')}
+                        className={setFieldClassName(name, formState, 'input')}
                         id={name}
                         name={name}
                         type={type}
@@ -51,7 +52,7 @@ const FormField = (props) => {
                         min={setDateRange(type)}
                         autoComplete="off"
                     />
-                    <span className={setClassName(name, formState, 'border')} />
+                    <span className={setFieldClassName(name, formState, 'border')} />
                 </label>
                 <div className="form__placeholder">{renderErrorMsg()}</div>
             </>

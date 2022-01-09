@@ -8,6 +8,10 @@ html {
     padding: 0;
 }
 
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
 ul,
 ol {
     list-style: none;

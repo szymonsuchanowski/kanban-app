@@ -1,0 +1,31 @@
+.modal__paragraph {
+    font-weight: 700;
+    letter-spacing: var(--letter-spacing-basic);
+    margin: 1.5rem 0 2.5rem;
+    text-align: center;
+}
+
+.modal__actions {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.modal__confirm,
+.modal__cancel {
+    border-radius: 12px;
+    box-shadow: var(--box-shadow-btn);
+    font-weight: 700;
+    letter-spacing: var(--letter-spacing-basic);
+    padding: 0.5rem 0.75rem;
+    width: 60px;
+    color: var(--white-basic);
+}
+
+.modal__confirm {
+    background: var(--green-basic);
+}
+
+.modal__cancel {
+    background: var(--red-basic);
+}

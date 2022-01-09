@@ -6,13 +6,13 @@ import './Board.css';
 const Board = () => {
     const columns = useContext(ColumnsContext);
     return (
-        <div className="app__board board">
-            <ol className="board__container">
+        <section className="app__board board">
+            <ol className="board__list">
                 {columns.map((col) => (
                     <Column key={col.name} data={col} />
                 ))}
             </ol>
-        </div>
+        </section>
     );
 };
 

@@ -13,6 +13,7 @@ import {
     setDetailClassName,
 } from '../helpers/helpersFunctions';
 import Confirmation from './Confirmation';
+import './Task.css';
 
 const Task = (props) => {
     const {
@@ -65,64 +66,72 @@ const Task = (props) => {
         showModal();
     };
 
-    const renderDeadline = (deadlineDate) => (
-        <div className={setDetailClassName(deadlineDate)}>
-            <p className="item__label">deadline</p>
-            <p className="item__msg">{setDateFormat(deadlineDate)}</p>
-        </div>
+    const checkDescription = () =>
+        message ? <p className="item__description">{message}</p> : null;
+
+    const renderDeadline = () => (
+        <p className={setDetailClassName(date, idColumn, columns)}>
+            <i className="far fa-hourglass item__icon item__icon--deadline" /> {setDateFormat(date)}
+        </p>
     );
 
-    const renderMsg = () => (
-        <div className="item__wrapper">
-            <p className="item__label">description</p>
-            <p className="item__msg">{message}</p>
-        </div>
-    );
-
-    const renderAdditionalInfo = () => (
-        <div className="item__details">
-            {date ? renderDeadline(date) : null}
-            {message ? renderMsg() : null}
-        </div>
-    );
-
-    const checkAdditionalInfo = () => (date || message ? renderAdditionalInfo() : null);
+    const checkDeadline = () => (date ? renderDeadline() : null);
 
     const renderItemInfo = () => (
-        <div className="item__info">
-            <h3 className="item__task">{taskName}</h3>
-            <p className="item__owner">{owner}</p>
-            <a className="item__email" href={`mailto:${email}`}>
-                {email}
-            </a>
-        </div>
+        <>
+            <header className="item__header">
+                <h3 className="item__name">{taskName}</h3>
+                {checkDeadline()}
+            </header>
+            <div className="item__info">
+                <p className="item__owner">
+                    <i className="far fa-user item__icon" /> {owner}
+                </p>
+                <p className="item__email">
+                    <i className="far fa-envelope item__icon" />{' '}
+                    <a className="item__link" href={`mailto:${email}`}>
+                        {email}
+                    </a>
+                </p>
+                {checkDescription()}
+            </div>
+        </>
     );
 
     return (
         <li className="column__item item">
-            {renderItemInfo()}
-            {checkAdditionalInfo()}
-            <button onClick={() => handleRemove()} type="button" title="remove task">
-                remove task
-            </button>
-            <span
-                className={setNavClass('prev', columns, idColumn)}
-                onClick={() => handleMove('prev')}
-                role="button"
-                title="move to previous section"
-                aria-hidden
-            >
-                &lt;
-            </span>
-            <span
-                className={setNavClass('next', columns, idColumn)}
-                onClick={() => handleMove('next')}
-                role="button"
-                title="move to next section"
-                aria-hidden
-            >
-                &gt;
-            </span>
+            <span className="item__pin" />
+            <article className="item__task">
+                {renderItemInfo()}
+                <footer className="item__footer">
+                    <button
+                        className="item__btn"
+                        onClick={() => handleRemove()}
+                        type="button"
+                        title="remove task"
+                    >
+                        <i className="far fa-trash-alt item__icon item__icon--remove" />
+                    </button>
+                    <span
+                        className={setNavClass('prev', columns, idColumn)}
+                        onClick={() => handleMove('prev')}
+                        role="button"
+                        title="move to previous section"
+                        aria-hidden
+                    >
+                        <i className="fas fa-arrow-left item__icon" />
+                    </span>
+                    <span
+                        className={setNavClass('next', columns, idColumn)}
+                        onClick={() => handleMove('next')}
+                        role="button"
+                        title="move to next section"
+                        aria-hidden
+                    >
+                        <i className="fas fa-arrow-right item__icon" />
+                    </span>
+                </footer>
+            </article>
             <ModalWithContent />
         </li>
     );

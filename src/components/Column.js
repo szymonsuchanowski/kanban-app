@@ -17,7 +17,7 @@ const Column = (props) => {
     };
 
     const render1ColLayout = () => (
-        <ul className="column__sublist column__sublist--1col">
+        <ul className="column__list column__list--1col">
             <li className="column__subheader" />
             {renderTasks(isDivided)}
         </ul>
@@ -25,15 +25,33 @@ const Column = (props) => {
 
     const render2ColLayout = () => (
         <>
-            <ul className="column__sublist column__sublist--doing">
+            <ul className="column__list column__list--doing">
                 <li className="column__subheader">doing</li>
                 {renderTasks(isDivided, true)}
             </ul>
-            <ul className="column__sublist column__sublist--done">
+            <ul className="column__list column__list--done">
                 <li className="column__subheader">done</li>
                 {renderTasks(isDivided)}
             </ul>
         </>
+    );
+
+    const renderColumn = () => (
+        <div
+            className={
+                isDivided
+                    ? 'column__container column__container--2col'
+                    : 'column__container column__container--1col'
+            }
+        >
+            {isDivided ? render2ColLayout() : render1ColLayout()}
+        </div>
+    );
+
+    const renderNoTaskMsg = () => (
+        <div className="column__placeholder">
+            <p className="column__msg">no tasks</p>
+        </div>
     );
 
     return (
@@ -46,15 +64,7 @@ const Column = (props) => {
                     </p>
                 </div>
             </header>
-            <div
-                className={
-                    isDivided
-                        ? 'column__list column__list--2col'
-                        : 'column__list column__list--1col'
-                }
-            >
-                {isDivided ? render2ColLayout() : render1ColLayout()}
-            </div>
+            {tasks.length === 0 ? renderNoTaskMsg() : renderColumn()}
         </li>
     );
 };

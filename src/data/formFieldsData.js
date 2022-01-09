@@ -21,7 +21,7 @@ const formFields = [
     },
     {
         name: 'message',
-        label: 'task description',
+        label: 'description',
         fieldName: 'textarea',
     },
 ];
