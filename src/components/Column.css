@@ -30,23 +30,23 @@
 }
 
 .column__header--pending::before {
-    background-image: url('./../img/pending-icon.png');
+    background-image: url('./../icons/pending-icon.png');
 }
 
 .column__header--analysis::before {
-    background-image: url('./../img/analysis-icon.png');
+    background-image: url('./../icons/analysis-icon.png');
 }
 
 .column__header--development::before {
-    background-image: url('./../img/development-icon.png');
+    background-image: url('./../icons/development-icon.png');
 }
 
 .column__header--test::before {
-    background-image: url('./../img/test-icon.png');
+    background-image: url('./../icons/test-icon.png');
 }
 
 .column__header--deploy::before {
-    background-image: url('./../img/deploy-icon.png');
+    background-image: url('./../icons/deploy-icon.png');
 }
 
 .column__title {

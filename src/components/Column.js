@@ -58,7 +58,7 @@ const Column = (props) => {
         <li className="board__column column">
             <header className={`column__header column__header--${name}`}>
                 <div className="column__wrapper">
-                    <h2 className={`column__title column__title--${name}`}>{name}</h2>
+                    <h2 className="column__title">{name}</h2>
                     <p className="column__info">
                         {getColumnTasksQuantity(tasks, id)} / {limit}
                     </p>

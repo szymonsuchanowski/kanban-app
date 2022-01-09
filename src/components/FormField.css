@@ -22,14 +22,10 @@
     background: inherit;
     border: none;
     border-bottom: var(--border-bottom-basic);
-    display: block;
     font-weight: 700;
     letter-spacing: var(--letter-spacing-basic);
-    outline: 1px solid transparent;
     padding: 4px 0;
-    resize: none;
     transition: border-bottom var(--transition-data);
-    width: 100%;
 }
 
 .form__input--invalid {

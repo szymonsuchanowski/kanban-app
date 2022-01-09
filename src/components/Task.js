@@ -4,13 +4,13 @@ import { useModal } from '../hooks';
 import { TASKS_ACTIONS } from '../helpers/actions';
 import {
     setFullColumnInfo,
-    setNavClass,
+    setNavClassName,
     getColumnById,
     isColumnDivided,
     getFollowingColumnId,
     isColumnFull,
     setDateFormat,
-    setDetailClassName,
+    setDeadlineClassName,
 } from '../helpers/helpersFunctions';
 import Confirmation from './Confirmation';
 import './Task.css';
@@ -52,7 +52,7 @@ const Task = (props) => {
     const moveInsideColumn = () =>
         moveTask({ type: TASKS_ACTIONS.MOVE, payload: { id, isDoing: !isDoing } });
 
-    const handleMove = (direction) => {
+    const handleTaskMove = (direction) => {
         const [currentColumn] = getColumnById(idColumn, columns);
         const isCurrentColumnDivided = isColumnDivided(currentColumn);
         return isCurrentColumnDivided &&
@@ -66,11 +66,11 @@ const Task = (props) => {
         showModal();
     };
 
-    const checkDescription = () =>
+    const renderDescription = () =>
         message ? <p className="item__description">{message}</p> : null;
 
     const renderDeadline = () => (
-        <p className={setDetailClassName(date, idColumn, columns)}>
+        <p className={setDeadlineClassName(date, idColumn, columns)}>
             <i className="far fa-hourglass item__icon item__icon--deadline" /> {setDateFormat(date)}
         </p>
     );
@@ -93,7 +93,7 @@ const Task = (props) => {
                         {email}
                     </a>
                 </p>
-                {checkDescription()}
+                {renderDescription()}
             </div>
         </>
     );
@@ -113,8 +113,8 @@ const Task = (props) => {
                         <i className="far fa-trash-alt item__icon item__icon--remove" />
                     </button>
                     <span
-                        className={setNavClass('prev', columns, idColumn)}
-                        onClick={() => handleMove('prev')}
+                        className={setNavClassName('prev', columns, idColumn)}
+                        onClick={() => handleTaskMove('prev')}
                         role="button"
                         title="move to previous section"
                         aria-hidden
@@ -122,8 +122,8 @@ const Task = (props) => {
                         <i className="fas fa-arrow-left item__icon" />
                     </span>
                     <span
-                        className={setNavClass('next', columns, idColumn)}
-                        onClick={() => handleMove('next')}
+                        className={setNavClassName('next', columns, idColumn)}
+                        onClick={() => handleTaskMove('next')}
                         role="button"
                         title="move to next section"
                         aria-hidden

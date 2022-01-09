@@ -1,17 +1,17 @@
 const formFields = [
     {
         name: 'taskName',
-        label: 'task',
+        label: 'task*',
         type: 'text',
     },
     {
         name: 'owner',
-        label: 'owner',
+        label: 'owner*',
         type: 'text',
     },
     {
         name: 'email',
-        label: 'e-mail',
+        label: 'e-mail*',
         type: 'email',
     },
     {

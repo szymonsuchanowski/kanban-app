@@ -4,6 +4,12 @@
     margin-bottom: 1rem;
 }
 
+.modal__information {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
 .form {
     display: flex;
     flex-direction: column;

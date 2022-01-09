@@ -3,31 +3,31 @@ import { getCurrentDate } from './helpersFunctions';
 export default class DataValidator {
     taskName = {
         regExp: /^.{4,}$/,
-        err: 'required (min. 4 characters)',
+        err: 'min. 4 characters',
         required: true,
     };
 
     owner = {
         regExp: /^[a-zA-Z]{3,}(?:(-| )[a-zA-Z]+){0,2}$/,
-        err: 'required (min. 3 letters)',
+        err: 'min. 3 letters',
         required: true,
     };
 
     email = {
         regExp: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-        err: 'required (valid e-mail address)',
+        err: 'type valid e-mail address',
         required: true,
     };
 
     date = {
         regExp: /^20\d{2}[-/.](0[1-9]|1[0-2])[-/.](0[1-9]|[12]\d|3[01])$/,
-        err: 'today/future (dd.mm.yyyy) or empty (not required)',
+        err: 'today/future (dd.mm.yyyy) or empty',
         required: false,
     };
 
     message = {
         regExp: /^.{5,}$/,
-        err: 'min. 5 characters or empty (not required)',
+        err: 'min. 5 characters or empty',
         required: false,
     };
 

@@ -20,17 +20,6 @@ export const createFilteredTasksList = (is2ColLayout, isDoing, tasks, id) => {
     return getColumnTasksList(tasks, id);
 };
 
-export const setNavClass = (direction, columns, columnId) => {
-    let additionalClassName = `item__nav--${direction}`;
-    if (
-        (direction === 'prev' && columnId === 1) ||
-        (direction === 'next' && columnId === columns.length)
-    ) {
-        additionalClassName = 'item__nav--invisible';
-    }
-    return `item__nav ${additionalClassName}`;
-};
-
 export const getColumnById = (columnId, columns) => columns.filter((col) => col.id === columnId);
 
 export const isColumnDivided = (column) => column.isDivided;
@@ -96,7 +85,18 @@ export const sortTasksByDate = (taskData) =>
         return a.date < b.date ? -1 : 1;
     });
 
-export const setDetailClassName = (deadlineDate, idColumn, columns) => {
+export const setNavClassName = (direction, columns, columnId) => {
+    let additionalClassName = `item__nav--${direction}`;
+    if (
+        (direction === 'prev' && columnId === 1) ||
+        (direction === 'next' && columnId === columns.length)
+    ) {
+        additionalClassName = 'item__nav--invisible';
+    }
+    return `item__nav ${additionalClassName}`;
+};
+
+export const setDeadlineClassName = (deadlineDate, idColumn, columns) => {
     const currTime = new Date(getCurrentDate()).getTime();
     const deadlineTime = new Date(deadlineDate).getTime();
     const daysDifference = (deadlineTime - currTime) / (24 * 60 * 60 * 1000);

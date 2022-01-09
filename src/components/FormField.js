@@ -1,5 +1,5 @@
 import React from 'react';
-import { isObjectEmpty, setFieldClassName } from '../helpers/helpersFunctions';
+import { isObjectEmpty, setFieldClassName, getCurrentDate } from '../helpers/helpersFunctions';
 import { FORM_ACTIONS } from '../helpers/actions';
 import './FormField.css';
 
@@ -23,11 +23,6 @@ const FormField = (props) => {
         return !isObjectEmpty(errorsState) && errorsState[inputName]
             ? showErrMsg(errorsState[inputName])
             : null;
-    };
-
-    const getCurrentDate = () => {
-        const timezoneOffset = new Date().getTimezoneOffset() * 60000;
-        return new Date(Date.now() - timezoneOffset).toISOString().slice(0, 10);
     };
 
     const setDateRange = (type) => (type === 'date' ? getCurrentDate() : null);

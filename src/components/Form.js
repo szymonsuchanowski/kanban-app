@@ -101,6 +101,7 @@ const Form = (props) => {
                 {renderFormFields()}
                 <input className="form__btn" type="submit" value="add" />
             </form>
+            <span className="modal__information">* required field</span>
         </>
     );
 };

@@ -29,8 +29,8 @@ const Kanban = () => {
     };
 
     const handleTaskAdding = () => {
-        const [pendingCol] = columns;
-        const { limit, id, name } = pendingCol;
+        const [pendingColumn] = columns;
+        const { limit, id, name } = pendingColumn;
         const pendingTasksQuantity = getColumnTasksQuantity(tasks, id);
         return limit === pendingTasksQuantity ? showFullColumnInfo(name) : openForm();
     };
