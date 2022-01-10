@@ -8,7 +8,8 @@ const Confirmation = (props) => {
 
     const editTasks = useContext(EditContext);
 
-    const paragraphContent = id ? `Delete task ${taskName}?` : 'Clear the board?';
+    const setParagraphContent = () =>
+        id ? `Remove task ${taskName.toUpperCase()}?` : 'Clear the board?';
 
     const clearBoard = () => {
         editTasks({ type: TASKS_ACTIONS.CLEAR_BOARD });
@@ -24,7 +25,7 @@ const Confirmation = (props) => {
 
     return (
         <>
-            <p className="modal__paragraph">{paragraphContent}</p>
+            <p className="modal__paragraph">{setParagraphContent()}</p>
             <div className="modal__actions">
                 <button className="modal__confirm" onClick={handleRemove} type="button">
                     yes

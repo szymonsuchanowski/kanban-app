@@ -1,5 +1,9 @@
 import React, { useContext } from 'react';
-import { getColumnTasksQuantity, createFilteredTasksList } from '../helpers/helpersFunctions';
+import {
+    getColumnTasksQuantity,
+    createFilteredTasksList,
+    setColumnClassName,
+} from '../helpers/helpersFunctions';
 import { TasksContext } from '../context';
 import Task from './Task';
 import './Column.css';
@@ -17,33 +21,27 @@ const Column = (props) => {
     };
 
     const render1ColLayout = () => (
-        <ul className="column__list column__list--1col">
-            <li className="column__subheader" />
-            {renderTasks(isDivided)}
-        </ul>
+        <div className="column__1col">
+            <span className="column__subheader" />
+            <ul className="column__list column__list--1col">{renderTasks(isDivided)}</ul>
+        </div>
     );
 
     const render2ColLayout = () => (
         <>
-            <ul className="column__list column__list--doing">
-                <li className="column__subheader">doing</li>
-                {renderTasks(isDivided, true)}
-            </ul>
-            <ul className="column__list column__list--done">
-                <li className="column__subheader">done</li>
-                {renderTasks(isDivided)}
-            </ul>
+            <div className="column__2col">
+                <span className="column__subheader">doing</span>
+                <ul className="column__list column__list--doing">{renderTasks(isDivided, true)}</ul>
+            </div>
+            <div className="column__2col">
+                <span className="column__subheader">done</span>
+                <ul className="column__list column__list--done">{renderTasks(isDivided)}</ul>
+            </div>
         </>
     );
 
     const renderColumn = () => (
-        <div
-            className={
-                isDivided
-                    ? 'column__container column__container--2col'
-                    : 'column__container column__container--1col'
-            }
-        >
+        <div className={setColumnClassName(isDivided)}>
             {isDivided ? render2ColLayout() : render1ColLayout()}
         </div>
     );

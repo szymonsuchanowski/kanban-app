@@ -4,7 +4,7 @@ import { useModal } from '../hooks';
 import { TASKS_ACTIONS } from '../helpers/actions';
 import {
     setFullColumnInfo,
-    setNavClassName,
+    isNavBtnDisabled,
     getColumnById,
     isColumnDivided,
     getFollowingColumnId,
@@ -66,32 +66,54 @@ const Task = (props) => {
         showModal();
     };
 
-    const renderDescription = () =>
-        message ? <p className="item__description">{message}</p> : null;
+    const renderDescription = () => {
+        if (message) {
+            return (
+                <p className="item__info">
+                    <span className="item__label">
+                        <i className="fas fa-info item__icon" />
+                    </span>
+                    <span className="item__description">{message}</span>
+                </p>
+            );
+        }
+        return null;
+    };
 
-    const renderDeadline = () => (
-        <p className={setDeadlineClassName(date, idColumn, columns)}>
-            <i className="far fa-hourglass item__icon item__icon--deadline" /> {setDateFormat(date)}
-        </p>
-    );
-
-    const checkDeadline = () => (date ? renderDeadline() : null);
+    const renderDeadline = () => {
+        if (date) {
+            return (
+                <p className={setDeadlineClassName(date, idColumn, columns)}>
+                    <i className="fas fa-hourglass-end item__icon item__icon--deadline" />
+                    {setDateFormat(date)}
+                </p>
+            );
+        }
+        return null;
+    };
 
     const renderItemInfo = () => (
         <>
             <header className="item__header">
                 <h3 className="item__name">{taskName}</h3>
-                {checkDeadline()}
+                {renderDeadline()}
             </header>
-            <div className="item__info">
-                <p className="item__owner">
-                    <i className="far fa-user item__icon" /> {owner}
+            <div className="item__detail">
+                <p className="item__info">
+                    <span className="item__label">
+                        <i className="fas fa-user-ninja item__icon" />
+                    </span>
+                    <span className="item__description">{owner}</span>
                 </p>
-                <p className="item__email">
-                    <i className="far fa-envelope item__icon" />{' '}
-                    <a className="item__link" href={`mailto:${email}`}>
-                        {email}
-                    </a>
+                <p className="item__info">
+                    <span className="item__label">
+                        <i className="fas fa-at item__icon" />
+                    </span>
+                    <span className="item__description">
+                        <a className="item__link" href={`mailto:${email}`}>
+                            {email}
+                        </a>
+                    </span>
                 </p>
                 {renderDescription()}
             </div>
@@ -105,31 +127,31 @@ const Task = (props) => {
                 {renderItemInfo()}
                 <footer className="item__footer">
                     <button
-                        className="item__btn"
+                        className="item__btn item__btn--nav"
+                        onClick={() => handleTaskMove('prev')}
+                        type="button"
+                        title="move to previous section"
+                        disabled={isNavBtnDisabled('prev', columns, idColumn)}
+                    >
+                        <i className="fas fa-arrow-left item__icon" />
+                    </button>
+                    <button
+                        className="item__btn item__btn--remove"
                         onClick={() => handleRemove()}
                         type="button"
                         title="remove task"
                     >
-                        <i className="far fa-trash-alt item__icon item__icon--remove" />
+                        <i className="far fa-trash-alt item__icon item__icon" />
                     </button>
-                    <span
-                        className={setNavClassName('prev', columns, idColumn)}
-                        onClick={() => handleTaskMove('prev')}
-                        role="button"
-                        title="move to previous section"
-                        aria-hidden
-                    >
-                        <i className="fas fa-arrow-left item__icon" />
-                    </span>
-                    <span
-                        className={setNavClassName('next', columns, idColumn)}
+                    <button
+                        className="item__btn item__btn--nav"
                         onClick={() => handleTaskMove('next')}
-                        role="button"
+                        type="button"
                         title="move to next section"
-                        aria-hidden
+                        disabled={isNavBtnDisabled('next', columns, idColumn)}
                     >
                         <i className="fas fa-arrow-right item__icon" />
-                    </span>
+                    </button>
                 </footer>
             </article>
             <ModalWithContent />

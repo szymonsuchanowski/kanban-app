@@ -7,7 +7,7 @@ export const getColumnTasksList = (tasks, id) => tasks.filter((task) => task.idC
 export const getColumnTasksQuantity = (tasks, id) => getColumnTasksList(tasks, id).length;
 
 export const setFullColumnInfo = (columnName) => (
-    <p className="modal__paragraph">Oops, column {columnName} is already full.</p>
+    <p className="modal__paragraph">Column {columnName.toUpperCase()} is full.</p>
 );
 
 export const createFilteredTasksList = (is2ColLayout, isDoing, tasks, id) => {
@@ -85,16 +85,14 @@ export const sortTasksByDate = (taskData) =>
         return a.date < b.date ? -1 : 1;
     });
 
-export const setNavClassName = (direction, columns, columnId) => {
-    let additionalClassName = `item__nav--${direction}`;
-    if (
-        (direction === 'prev' && columnId === 1) ||
-        (direction === 'next' && columnId === columns.length)
-    ) {
-        additionalClassName = 'item__nav--invisible';
-    }
-    return `item__nav ${additionalClassName}`;
-};
+export const isNavBtnDisabled = (direction, columns, columnId) =>
+    (direction === 'prev' && columnId === 1) ||
+    (direction === 'next' && columnId === columns.length);
+
+export const setColumnClassName = (isDivided) =>
+    isDivided
+        ? 'column__container column__container--2col'
+        : 'column__container column__container--1col';
 
 export const setDeadlineClassName = (deadlineDate, idColumn, columns) => {
     const currTime = new Date(getCurrentDate()).getTime();

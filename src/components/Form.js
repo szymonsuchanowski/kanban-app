@@ -48,7 +48,6 @@ const Form = (props) => {
         const errorsArr = [];
         createErrors(errorsArr);
         const errorsObj = convertArrToObj(errorsArr);
-        console.log(state);
         return errorsObj;
     };
 

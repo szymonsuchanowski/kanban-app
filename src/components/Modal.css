@@ -39,3 +39,31 @@
     display: flex;
     flex-direction: column;
 }
+
+@media only screen and (min-width: 480px) {
+    .modal {
+        justify-content: center;
+    }
+
+    .modal__content {
+        width: 85%;
+    }
+}
+
+@media only screen and (min-width: 640px) {
+    .modal__content {
+        width: 70%;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .modal__content {
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 1250px) {
+    .modal__content {
+        max-width: 800px;
+    }
+}

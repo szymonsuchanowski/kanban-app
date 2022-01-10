@@ -20,6 +20,7 @@
     --letter-spacing-high: 0.3rem;
     --letter-spacing-mid: 0.2rem;
     --red-basic: rgba(252, 47, 40, 1);
+    --red-basic-transparent: rgba(252, 47, 40, 0.5);
     --red-pin-bg: radial-gradient(var(--red-basic) 50%, black 100%);
     --transition-data: 0.25s linear;
     --white-basic: rgba(254, 255, 255, 1);

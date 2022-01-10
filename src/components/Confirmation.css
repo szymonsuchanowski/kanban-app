@@ -15,11 +15,12 @@
 .modal__cancel {
     border-radius: 12px;
     box-shadow: var(--box-shadow-btn);
+    color: var(--white-basic);
     font-weight: 700;
     letter-spacing: var(--letter-spacing-basic);
+    max-width: 120px;
     padding: 0.5rem 0.75rem;
-    width: 60px;
-    color: var(--white-basic);
+    width: 30%;
 }
 
 .modal__confirm {
@@ -28,4 +29,10 @@
 
 .modal__cancel {
     background: var(--red-basic);
+}
+
+@media only screen and (min-width: 480px) {
+    .modal__actions {
+        gap: 3rem;
+    }
 }
