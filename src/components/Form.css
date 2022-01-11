@@ -1,7 +1,7 @@
 .modal__title {
     font-size: 1.8rem;
     letter-spacing: var(--letter-spacing-basic);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .modal__information {

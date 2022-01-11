@@ -13,26 +13,23 @@
 
 .modal__content {
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     background: var(--white-modal-bg-content);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     padding: 2rem;
+    position: relative;
     width: 100%;
 }
 
-.modal__bar {
-    margin-bottom: 1rem;
-    position: relative;
-}
-
 .modal__btn {
-    background: inherit;
+    background: transparent;
     font-size: 1.2rem;
     padding: 0.5rem;
-    position: fixed;
+    position: absolute;
     right: 0.5rem;
-    top: 0.25rem;
+    top: 0;
 }
 
 .modal__container {

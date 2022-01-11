@@ -9,16 +9,14 @@ const Modal = (props) => {
     return (
         <div className="board__modal modal" onClick={handleClick} aria-hidden>
             <div className="modal__content">
-                <div className="modal__bar">
-                    <button
-                        className="modal__btn"
-                        title="close window"
-                        type="button"
-                        onClick={() => closeModal()}
-                    >
-                        &#x2715;
-                    </button>
-                </div>
+                <button
+                    className="modal__btn"
+                    title="close window"
+                    type="button"
+                    onClick={() => closeModal()}
+                >
+                    &#x2715;
+                </button>
                 <div className="modal__container">{children}</div>
             </div>
         </div>
