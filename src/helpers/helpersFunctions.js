@@ -1,6 +1,7 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 import fields from '../data/formFieldsData';
+import importantDeadline from '../data/importantDeadline';
 
 export const getColumnTasksList = (tasks, id) => tasks.filter((task) => task.idColumn === id);
 
@@ -98,7 +99,7 @@ export const setDeadlineClassName = (deadlineDate, idColumn, columns) => {
     const currTime = new Date(getCurrentDate()).getTime();
     const deadlineTime = new Date(deadlineDate).getTime();
     const daysDifference = (deadlineTime - currTime) / (24 * 60 * 60 * 1000);
-    return daysDifference <= 2 && idColumn !== columns.length
+    return daysDifference <= importantDeadline && idColumn !== columns.length
         ? 'item__deadline item__deadline--important'
         : 'item__deadline';
 };
