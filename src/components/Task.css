@@ -122,8 +122,9 @@
 
 .item__btn {
     align-items: center;
+    background: none;
+    border: 1px solid var(--black-basic);
     border-radius: 50%;
-    color: var(--white-basic);
     cursor: pointer;
     display: flex;
     height: 30px;
@@ -131,12 +132,12 @@
     width: 30px;
 }
 
-.item__btn--nav {
-    background: var(--green-basic);
+.item__btn--prev {
+    transform: rotate(90deg);
 }
 
-.item__btn--remove {
-    background: var(--red-basic);
+.item__btn--next {
+    transform: rotate(90deg);
 }
 
 .item__btn:disabled {
@@ -179,21 +180,35 @@
 
     .item__btn {
         background: inherit;
-        color: var(--black-basic);
-        transition: box-shadow var(--transition-data), color var(--transition-data),
-            transform var(--transition-data);
+        border: 2px solid transparent;
+        transform: rotate(0);
+        transition: background-color var(--transition-data), color var(--transition-data);
     }
 
     .item__btn:hover {
         color: var(--white-basic);
-        transform: scale(1.15);
+    }
+
+    .item__btn--prev:hover,
+    .item__btn--next:hover {
+        background: var(--green-basic);
     }
 
     .item__btn--remove:hover {
-        box-shadow: inset 0 -3.25em 0 0 var(--red-basic);
+        background: var(--red-basic);
     }
 
-    .item__btn--nav:hover {
-        box-shadow: inset 0 -3.25em 0 0 var(--green-basic);
+    .column__list--doing .item__btn--next {
+        transform: rotate(90deg);
+    }
+
+    .column__list--done .item__btn--prev {
+        transform: rotate(90deg);
+    }
+}
+
+@media only screen and (min-width: 1250px) {
+    .column__list .item__btn {
+        transform: rotate(0);
     }
 }

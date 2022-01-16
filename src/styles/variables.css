@@ -2,25 +2,26 @@
     --black-basic: rgba(0, 0, 0, 1);
     --black-modal-layer: rgba(0, 0, 0, 0.45);
     --black-shadow-stickynote: rgba(0, 0, 0, 0.2);
-    --blue-dark-bg: rgba(7, 19, 128, 1);
-    --blue-header-bg: rgba(87, 123, 193, 1);
+    --blue-header-bg: rgba(119, 166, 247, 1);
     --border-bottom-basic: 1px solid var(--black-basic);
-    --box-shadow-bar: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    --box-shadow-bar: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     --box-shadow-btn: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
         rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     --box-shadow-col: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    --box-shadow-header: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
     --box-shadow-pin: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
         rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     --box-shadow-stickynote: 2px 15px 5px rgba(0, 0, 0, 0.4);
     --gradient-stickynote: linear-gradient(135deg, #ffff88 81%, #ffff88 82%, #ffffc6 100%);
-    --green-basic: rgba(34, 201, 65, 1);
+    --green-basic: rgba(0, 136, 122, 1);
     --grey-bg-btn-disabled: rgba(235, 232, 232, 1);
+    --grey-bg: rgba(151, 164, 185, 1);
     --grey-color-btn-disabled: rgba(189, 186, 186, 1);
     --letter-spacing-basic: 0.1rem;
     --letter-spacing-high: 0.3rem;
     --letter-spacing-mid: 0.2rem;
-    --red-basic: rgba(252, 47, 40, 1);
-    --red-basic-transparent: rgba(252, 47, 40, 0.5);
+    --red-basic-transparent: rgba(254, 83, 83, 0.7);
+    --red-basic: rgba(254, 83, 83, 1);
     --red-pin-bg: radial-gradient(var(--red-basic) 50%, black 100%);
     --transition-data: 0.25s linear;
     --white-basic: rgba(254, 255, 255, 1);

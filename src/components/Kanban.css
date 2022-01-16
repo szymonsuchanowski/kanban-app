@@ -1,6 +1,6 @@
 .bar {
     background: var(--white-basic);
-    box-shadow: var(--box-shadow-bar);
+    box-shadow: var(--box-shadow-header);
     position: sticky;
     top: 0;
     z-index: 2;
@@ -57,7 +57,8 @@
 
 .app__information {
     align-items: center;
-    background: var(--blue-dark-bg);
+    background: var(--grey-bg);
+    box-shadow: var(--box-shadow-bar);
     color: var(--white-basic);
     display: flex;
     justify-content: center;

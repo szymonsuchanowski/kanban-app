@@ -127,7 +127,7 @@ const Task = (props) => {
                 {renderItemInfo()}
                 <footer className="item__footer">
                     <button
-                        className="item__btn item__btn--nav"
+                        className="item__btn item__btn--prev"
                         onClick={() => handleTaskMove('prev')}
                         type="button"
                         title="move to previous section"
@@ -144,7 +144,7 @@ const Task = (props) => {
                         <i className="far fa-trash-alt item__icon item__icon" />
                     </button>
                     <button
-                        className="item__btn item__btn--nav"
+                        className="item__btn item__btn--next"
                         onClick={() => handleTaskMove('next')}
                         type="button"
                         title="move to next section"
