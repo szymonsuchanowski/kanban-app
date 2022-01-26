@@ -1,9 +1,8 @@
-# Kanban Board App
-![Kanban Board App screenshot](/img/kanban-board-app.png "Kanban Board app screenshot")
+![Kanban Board App screenshot](/img/kanban-board-devices.png "Kanban Board app screenshot")
 
 &nbsp;
 
-## Overview
+## 🔍 Overview
 
 ### What is Kanban?
 
