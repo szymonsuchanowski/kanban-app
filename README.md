@@ -2,6 +2,12 @@
 
 &nbsp;
 
+## 🔥 Live
+
+Click to see live demo: [Kanban Board App](https://szymonsuchanowski.github.io/kanban-app/)!
+
+&nbsp;
+
 ## 🔍 Overview
 
 ### What is Kanban?
