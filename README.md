@@ -140,6 +140,15 @@ const columnsData = [
 - [10 Kanban Board Software Options You Need to Know For 2020](https://instagantt.com/gantt-chart-experts/top-10-best-kanban-board-software-in-2020) - article with 10 Kanban tools (as a source of inspiration)
 
 &nbsp;
+## 🥷 Author
+
+Coded by **Szymon Suchanowski**.
+
+Feel free to contact me:
+- [LinkedIn](https://www.linkedin.com/in/suchanowski/)
+- [GitHub](https://github.com/szymonsuchanowski)
+
+&nbsp;
 ## 🙏 Special thanks
 
 Special thanks to my [Mentor - devmentor.pl](https://devmentor.pl/) for providing me with the task and code review.
